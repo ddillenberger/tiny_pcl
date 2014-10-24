@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>
+	
+	<node pkg="tiny_pcl" type="test_pcl_transport" name="$(anon test_pcl_transport)" output="screen"/>
+	<include file="$(find tiny_pcl)/launch/pointcloud_transport_test.launch">
+		<arg name="src_topic" value="/sample_points"/>
+		<arg name="channels" value="0 1 2"/>
+		<arg name="scale_factor" value="500 500 500"/>		
+		<arg name="use_zlib" value="true"/>
+	</include>
+	<include file="$(find tiny_pcl)/launch/pointcloud_transport_test.launch">
+		<arg name="src_topic" value="/sample_points2"/>
+		<arg name="channels" value="0 1 2"/>
+		<arg name="scale_factor" value="500 500 500"/>		
+		<arg name="use_zlib" value="true"/>
+	</include>
+
+</launch>
+

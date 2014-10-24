@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<launch>
+
+	<arg name="src_machine" default=""/>
+	<arg name="dst_machine" default=""/>
+	<arg name="src_topic" default="/velodyne_points"/>
+	<arg name="channels" default="0 1 2"/>
+	<arg name="scale_factor" default="500 500 500"/>
+	<arg name="use_zlib" default="true"/>
+	<arg name="dst_topic_suffix" default=""/>
+	<arg name="receiver_only" default="false"/>
+
+	<node unless="$(arg receiver_only)" pkg="tiny_pcl" type="pointcloud_transport" name="$(anon sender)" output="screen">
+		<param name="mode" value="compress"/>
+		<param name="src_topic" value="$(arg src_topic)"/>
+		<param name="channels" value="$(arg channels)"/>
+		<param name="scale_factor" value="$(arg scale_factor)"/>
+		<param name="use_zlib" value="$(arg use_zlib)"/>
+		<param name="dst_topic_suffix" value="$(arg dst_topic_suffix)"/>
+	</node>
+	<node pkg="tiny_pcl" type="pointcloud_transport" name="$(anon receiver)" output="screen">
+		<param name="mode" value="decompress"/>
+		<param name="src_topic" value="$(arg src_topic)"/>
+		<param name="channels" value="$(arg channels)"/>
+		<param name="scale_factor" value="$(arg scale_factor)"/>
+		<param name="use_zlib" value="$(arg use_zlib)"/>
+		<param name="dst_topic_suffix" value="$(arg dst_topic_suffix)"/>
+	</node>
+
+</launch>
+

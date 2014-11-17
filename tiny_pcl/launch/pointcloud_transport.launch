@@ -18,7 +18,7 @@
 		<param name="use_zlib" value="$(arg use_zlib)"/>
 		<param name="dst_topic_suffix" value="$(arg dst_topic_suffix)"/>
 	</node>
-	<node pkg="tiny_pcl" type="pointcloud_transport" name="$(anon tiny_pcl_receiver)">
+	<node pkg="tiny_pcl" type="pointcloud_transport" name="$(anon tiny_pcl_receiver)" machine="$(arg dst_machine)">
 		<param name="mode" value="decompress"/>
 		<param name="src_topic" value="$(arg src_topic)"/>
 		<param name="channels" value="$(arg channels)"/>
